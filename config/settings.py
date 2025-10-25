@@ -41,14 +41,18 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    # Third-party apps that need to be before admin
+    "django_dynamic_admin_forms",
+    # Django apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party apps
+    # Other third-party apps
     "debug_toolbar",
+    "treenode",
     # Local apps
     "core",
 ]

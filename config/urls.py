@@ -18,9 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from django.http import HttpResponse
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("dynamic-admin-form/", include("django_dynamic_admin_forms.urls")),
+    path("favicon.ico", lambda r: HttpResponse(status=204)),  # Silence favicon 404
     path("", include("core.urls")),
 ]
 
