@@ -105,18 +105,19 @@ class ApplicationAdmin(admin.ModelAdmin):
         """
         Override to provide additional context for tree display
         """
-        form = super().get_form(request, obj, **kwargs)
+        form_class = super().get_form(request, obj, **kwargs)
+        form = form_class()
 
         # Add help text about tree structure for attributes
-        if "attributes" in form.base_fields:
-            form.base_fields["attributes"].help_text = (
+        if "attributes" in form.fields:
+            form.fields["attributes"].help_text = (
                 "Select attributes to associate with this application. "
                 'Attributes are shown in tree structure with "—" indicating child levels.'
             )
 
         # Add help text about tree structure for organisations
-        if "organisations" in form.base_fields:
-            form.base_fields["organisations"].help_text = (
+        if "organisations" in form.fields:
+            form.fields["organisations"].help_text = (
                 "Select organisations to associate with this application. "
                 'Organisations are shown in tree structure with "—" indicating child levels.'
             )
