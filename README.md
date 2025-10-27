@@ -150,8 +150,11 @@ uv run python manage.py loaddata test_data
 ### Install Development Dependencies
 
 ```bash
-# Install development tools
-uv pip install --dev
+# Install project dependencies including dev tools
+uv sync --all-extras
+
+# Or install just the dev dependencies
+uv pip install --system ruff black isort coverage safety bandit
 ```
 
 ### Code Quality Tools

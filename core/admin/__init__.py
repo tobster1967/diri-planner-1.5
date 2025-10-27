@@ -7,4 +7,4 @@ from .application_admin import ApplicationAdmin
 from .attribute_admin import AttributeAdmin
 from .organisation_admin import OrganisationAdmin
 
-__all__ = ['ApplicationAdmin', 'AttributeAdmin', 'OrganisationAdmin']
+__all__ = ["ApplicationAdmin", "AttributeAdmin", "OrganisationAdmin"]
