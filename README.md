@@ -1,0 +1,180 @@
+# DIRI Planner
+
+A Django-based application management system with hierarchical organization structures, attributes, and full CRUD functionality.
+
+## Features
+
+- **Application Management**: Full CRUD operations for applications with hierarchical relationships
+- **Organisation Structure**: Tree-based organization hierarchy with contact information
+- **Attributes System**: Flexible attribute system with multiple data types
+- **Clean UI**: Simple, responsive interface with no external dependencies
+- **Comprehensive Testing**: 33 automated tests covering all functionality
+
+## Technology Stack
+
+- **Framework**: Django 5.2.7
+- **Database**: PostgreSQL
+- **Package Manager**: uv (Python package manager)
+- **CRUD Framework**: Neapolitan (lightweight Django CRUD)
+- **Tree Structure**: django-fast-treenode
+- **Admin Enhancements**: django-dynamic-admin-forms
+
+## Quick Start
+
+### 1. Prerequisites
+
+- Python 3.12+
+- PostgreSQL
+- uv package manager
+
+### 2. Setup
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd diri-planner-1.5
+
+# Install dependencies using uv
+uv sync
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your database credentials
+
+# Run migrations
+uv run python manage.py migrate
+
+# Create a superuser (optional)
+uv run python manage.py createsuperuser
+```
+
+### 3. Load Fixtures
+
+Choose one of the available fixtures:
+
+```bash
+# Load test data (neutral fixtures for testing)
+uv run python manage.py loaddata test_data
+
+# OR load current data (production-like data)
+uv run python manage.py loaddata current_data
+```
+
+### 4. Run Development Server
+
+```bash
+uv run python manage.py runserver 8000
+```
+
+Visit http://localhost:8000 to access the application.
+
+### 5. Run Tests
+
+```bash
+# Run all tests
+uv run python manage.py test core.tests
+
+# Run tests with verbose output
+uv run python manage.py test core.tests --verbosity=2
+
+# Run specific test file
+uv run python manage.py test core.tests.test_application_model
+
+# Run specific test class
+uv run python manage.py test core.tests.test_application_model.ApplicationModelTest
+```
+
+## Project Structure
+
+```
+diri-planner-1.5/
+├── config/                 # Django project settings
+├── core/                   # Main application
+│   ├── admin/             # Admin configurations
+│   ├── fixtures/          # Data fixtures
+│   │   ├── test_data.json       # Test fixtures
+│   │   └── current_data.json    # Production data dump
+│   ├── migrations/        # Database migrations
+│   ├── models/            # Data models
+│   ├── static/            # Static files (CSS, JS)
+│   │   └── css/
+│   │       └── application.css  # Main stylesheet
+│   ├── templates/         # HTML templates
+│   ├── tests/             # Test suite (33 tests)
+│   │   ├── test_application_model.py
+│   │   ├── test_attribute_model.py
+│   │   ├── test_organisation_model.py
+│   │   ├── test_application_views.py
+│   │   ├── test_application_integration.py
+│   │   └── test_home_redirect.py
+│   └── views/             # View logic
+├── docs/                  # Documentation
+├── pyproject.toml         # Project dependencies
+└── README.md             # This file
+```
+
+## Available URLs
+
+- `/` - Redirects to application list
+- `/application/` - List all applications
+- `/application/new/` - Create new application
+- `/application/<uuid>/` - View application details
+- `/application/<uuid>/edit/` - Edit application
+- `/application/<uuid>/delete/` - Delete application
+- `/admin/` - Django admin interface
+
+## Development
+
+### Creating Database Dumps
+
+```bash
+# Dump current database to fixtures
+uv run python manage.py dumpdata core --indent 2 --output core/fixtures/backup.json
+```
+
+### Resetting Database
+
+```bash
+# Reset database (WARNING: deletes all data)
+uv run python reset_database.py
+
+# Re-run migrations
+uv run python manage.py migrate
+
+# Load fixtures
+uv run python manage.py loaddata test_data
+```
+
+## Testing
+
+The project includes comprehensive test coverage:
+
+- **Model Tests**: 18 tests covering Application, Attribute, and Organisation models
+- **View Tests**: 12 tests covering all CRUD operations
+- **Integration Tests**: 3 end-to-end workflow tests
+- **Other Tests**: 1 test for URL routing
+
+All tests use the `test_data.json` fixture for consistent, isolated testing.
+
+## Database Configuration
+
+Default PostgreSQL settings (configure in `.env`):
+
+```env
+POSTGRES_DB=diri_planner
+POSTGRES_USER=diri_user
+POSTGRES_PASSWORD=diri_password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+```
+
+## Contributing
+
+1. Write tests for new features
+2. Ensure all tests pass before committing
+3. Follow Django best practices
+4. Update documentation as needed
+
+## License
+
+[Your License Here]

@@ -1,0 +1,273 @@
+[
+{
+  "model": "core.attribute",
+  "pk": "094575b8-cd42-420c-9c5e-3b140b7c0d47",
+  "fields": {
+    "parent": "88f0eb23-93df-4f01-b3f0-b7de23182752",
+    "priority": 1,
+    "_path": "001.001",
+    "_depth": 1,
+    "slug": "addon",
+    "created_at": "2025-10-24T15:58:55.421Z",
+    "updated_at": "2025-10-24T16:08:53.341Z",
+    "name": "addon",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.attribute",
+  "pk": "244c5668-4181-47e9-a1d2-e8a37393f291",
+  "fields": {
+    "parent": "9f055060-bd97-49f5-a7e2-e652b11c3933",
+    "priority": 0,
+    "_path": "000.000",
+    "_depth": 1,
+    "slug": "islandoperatable",
+    "created_at": "2025-10-24T15:58:06.853Z",
+    "updated_at": "2025-10-27T10:13:27.769Z",
+    "name": "islandoperatable",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.attribute",
+  "pk": "88f0eb23-93df-4f01-b3f0-b7de23182752",
+  "fields": {
+    "parent": null,
+    "priority": 1,
+    "_path": "001",
+    "_depth": 0,
+    "slug": "application",
+    "created_at": "2025-10-24T15:58:30.152Z",
+    "updated_at": "2025-10-24T15:58:30.152Z",
+    "name": "application",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.attribute",
+  "pk": "9f055060-bd97-49f5-a7e2-e652b11c3933",
+  "fields": {
+    "parent": null,
+    "priority": 0,
+    "_path": "000",
+    "_depth": 0,
+    "slug": "axpo",
+    "created_at": "2025-10-24T15:57:42.357Z",
+    "updated_at": "2025-10-24T16:08:18.117Z",
+    "name": "axpo",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.attribute",
+  "pk": "a0a9e8d9-498e-4528-8a92-ded00ce89d28",
+  "fields": {
+    "parent": "9f055060-bd97-49f5-a7e2-e652b11c3933",
+    "priority": 1,
+    "_path": "000.001",
+    "_depth": 1,
+    "slug": "g22",
+    "created_at": "2025-10-24T15:57:54.971Z",
+    "updated_at": "2025-10-24T16:08:31.568Z",
+    "name": "g22",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.attribute",
+  "pk": "c3b46abc-f8f1-4b56-8817-576797c6229c",
+  "fields": {
+    "parent": "88f0eb23-93df-4f01-b3f0-b7de23182752",
+    "priority": 0,
+    "_path": "001.000",
+    "_depth": 1,
+    "slug": "special",
+    "created_at": "2025-10-24T15:58:40.643Z",
+    "updated_at": "2025-10-24T15:58:40.643Z",
+    "name": "special",
+    "value": "true",
+    "data_type": "boolean",
+    "description": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.organisation",
+  "pk": "8a6d4f0d-7926-40c7-8c62-4f1690828fa9",
+  "fields": {
+    "parent": "b48c2a32-b20a-4c7c-a6a0-7b2c607ba13b",
+    "priority": 0,
+    "_path": "000.000",
+    "_depth": 1,
+    "slug": "kkb",
+    "created_at": "2025-10-24T15:56:54.216Z",
+    "updated_at": "2025-10-24T15:56:54.216Z",
+    "name": "KKB",
+    "description": "Kernkraftwerk Beznau",
+    "code": "KKB",
+    "email": "",
+    "phone": "",
+    "address": "",
+    "website": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.organisation",
+  "pk": "b48c2a32-b20a-4c7c-a6a0-7b2c607ba13b",
+  "fields": {
+    "parent": null,
+    "priority": 0,
+    "_path": "000",
+    "_depth": 0,
+    "slug": "axpo-group",
+    "created_at": "2025-10-24T15:55:57.322Z",
+    "updated_at": "2025-10-24T15:55:57.322Z",
+    "name": "Axpo Group",
+    "description": "Axpo Group",
+    "code": "AXK",
+    "email": "",
+    "phone": "",
+    "address": "",
+    "website": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.organisation",
+  "pk": "db361d57-1023-4e11-82c6-a13321ae2b9a",
+  "fields": {
+    "parent": "b48c2a32-b20a-4c7c-a6a0-7b2c607ba13b",
+    "priority": 1,
+    "_path": "000.001",
+    "_depth": 1,
+    "slug": "zwilag",
+    "created_at": "2025-10-24T16:09:36.070Z",
+    "updated_at": "2025-10-24T16:09:36.070Z",
+    "name": "ZWILAG",
+    "description": "Zwischenlager",
+    "code": "ZWILAG",
+    "email": "",
+    "phone": "",
+    "address": "",
+    "website": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.organisation",
+  "pk": "fc471200-d823-4f4a-b4e8-9f0e9efa000d",
+  "fields": {
+    "parent": "b48c2a32-b20a-4c7c-a6a0-7b2c607ba13b",
+    "priority": 2,
+    "_path": "000.002",
+    "_depth": 1,
+    "slug": "kkl",
+    "created_at": "2025-10-24T15:56:26.563Z",
+    "updated_at": "2025-10-24T15:56:26.563Z",
+    "name": "KKL",
+    "description": "Kernkraftwerk Leibstadt",
+    "code": "KKL",
+    "email": "",
+    "phone": "",
+    "address": "",
+    "website": "",
+    "is_active": true,
+    "metadata": {}
+  }
+},
+{
+  "model": "core.application",
+  "pk": "711d17fd-a765-41c8-8ad1-a30370b339b3",
+  "fields": {
+    "parent": null,
+    "priority": 0,
+    "_path": "000",
+    "_depth": 0,
+    "slug": "gsoft",
+    "created_at": "2025-10-24T15:59:32.847Z",
+    "updated_at": "2025-10-27T09:59:52.367Z",
+    "name": "GSoft",
+    "description": "GSoft",
+    "properties": {},
+    "attributes": [
+      "a0a9e8d9-498e-4528-8a92-ded00ce89d28",
+      "094575b8-cd42-420c-9c5e-3b140b7c0d47"
+    ],
+    "organisations": [
+      "8a6d4f0d-7926-40c7-8c62-4f1690828fa9"
+    ]
+  }
+},
+{
+  "model": "core.application",
+  "pk": "de8a1aef-7b61-41c7-a146-429ea2e15bfd",
+  "fields": {
+    "parent": "711d17fd-a765-41c8-8ad1-a30370b339b3",
+    "priority": 0,
+    "_path": "000.000",
+    "_depth": 1,
+    "slug": "perdos",
+    "created_at": "2025-10-24T16:05:59.319Z",
+    "updated_at": "2025-10-24T16:06:16.990Z",
+    "name": "PERDOS",
+    "description": "Perdos",
+    "properties": {},
+    "attributes": [
+      "a0a9e8d9-498e-4528-8a92-ded00ce89d28",
+      "094575b8-cd42-420c-9c5e-3b140b7c0d47"
+    ],
+    "organisations": [
+      "8a6d4f0d-7926-40c7-8c62-4f1690828fa9"
+    ]
+  }
+},
+{
+  "model": "core.application",
+  "pk": "f8a396ee-a9fe-4ef1-b245-94cd7e06fd51",
+  "fields": {
+    "parent": "711d17fd-a765-41c8-8ad1-a30370b339b3",
+    "priority": 1,
+    "_path": "000.001",
+    "_depth": 1,
+    "slug": "isram",
+    "created_at": "2025-10-24T15:59:50.337Z",
+    "updated_at": "2025-10-24T16:10:10.398Z",
+    "name": "ISRAM",
+    "description": "ISRAM",
+    "properties": {},
+    "attributes": [
+      "a0a9e8d9-498e-4528-8a92-ded00ce89d28",
+      "094575b8-cd42-420c-9c5e-3b140b7c0d47"
+    ],
+    "organisations": [
+      "8a6d4f0d-7926-40c7-8c62-4f1690828fa9"
+    ]
+  }
+}
+]
