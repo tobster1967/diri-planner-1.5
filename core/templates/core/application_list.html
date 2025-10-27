@@ -1,73 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applications</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .no-data {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-    </style>
-</head>
-<body>
-    <h1>Applications</h1>
-    
-    {% if applications %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Parent</th>
-                    <th>Description</th>
-                    <th>Created</th>
-                    <th>Updated</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for application in applications %}
-                <tr>
-                    <td>{{ application.name }}</td>
-                    <td>{{ application.parent.name|default:"-" }}</td>
-                    <td>{{ application.description|truncatewords:20|default:"-" }}</td>
-                    <td>{{ application.created_at|date:"Y-m-d H:i" }}</td>
-                    <td>{{ application.updated_at|date:"Y-m-d H:i" }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <div class="no-data">
-            <p>No applications found.</p>
-        </div>
-    {% endif %}
-</body>
-</html>
+{% extends "core/base.html" %}
+
+{% block title %}Applications{% endblock %}
+
+{% block content %}
+<h2>Applications</h2>
+
+<div style="margin: 20px 0;">
+    <a href="{% url 'application-create' %}" class="btn">Create New Application</a>
+</div>
+
+{% if object_list %}
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parent</th>
+            <th>Slug</th>
+            <th>Created</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for application in object_list %}
+        <tr>
+            <td>
+                <a href="{% url 'application-detail' application.pk %}">
+                    {{ application.name }}
+                </a>
+            </td>
+            <td>{{ application.parent|default:"-" }}</td>
+            <td>{{ application.slug }}</td>
+            <td>{{ application.created_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                <a href="{% url 'application-update' application.pk %}">Edit</a> | 
+                <a href="{% url 'application-delete' application.pk %}" style="color: #e74c3c;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No applications found. <a href="{% url 'application-create' %}">Create one now</a>.</p>
+{% endif %}
+{% endblock %}

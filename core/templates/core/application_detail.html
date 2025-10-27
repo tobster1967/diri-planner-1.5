@@ -1,0 +1,78 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ object.name }}</h2>
+
+<table class="detail-table">
+    <tr>
+        <th>Name:</th>
+        <td>{{ object.name }}</td>
+    </tr>
+    <tr>
+        <th>Slug:</th>
+        <td>{{ object.slug }}</td>
+    </tr>
+    <tr>
+        <th>Parent:</th>
+        <td>
+            {% if object.parent %}
+            <a href="{% url 'application-detail' object.parent.pk %}">{{ object.parent.name }}</a>
+            {% else %}
+            -
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td>{{ object.description|default:"-" }}</td>
+    </tr>
+    <tr>
+        <th>Level:</th>
+        <td>{{ object.level }}</td>
+    </tr>
+    <tr>
+        <th>Full Path:</th>
+        <td>{{ object.get_full_path }}</td>
+    </tr>
+    <tr>
+        <th>Created:</th>
+        <td>{{ object.created_at }}</td>
+    </tr>
+    <tr>
+        <th>Updated:</th>
+        <td>{{ object.updated_at }}</td>
+    </tr>
+    <tr>
+        <th>Attributes:</th>
+        <td>
+            {% if object.attributes.all %}
+            {% for attr in object.attributes.all %}
+            {{ attr.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            {% else %}
+            -
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <th>Organisations:</th>
+        <td>
+            {% if object.organisations.all %}
+            {% for org in object.organisations.all %}
+            {{ org.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            {% else %}
+            -
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<div class="actions">
+    <a href="{% url 'application-update' object.pk %}" class="btn">Edit</a>
+    <a href="{% url 'application-delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'application-list' %}" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}
