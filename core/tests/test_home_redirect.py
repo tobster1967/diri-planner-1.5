@@ -16,4 +16,4 @@ class HomeRedirectTest(TestCase):
         """Test that root URL redirects to application list."""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 302)
-        self.assertTrue(response.url.endswith("/application/"))
+        self.assertTrue(response['Location'].endswith("/application/"))

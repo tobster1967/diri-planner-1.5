@@ -66,7 +66,7 @@ uv run python manage.py loaddata current_data
 uv run python manage.py runserver 8000
 ```
 
-Visit http://localhost:8000 to access the application.
+Visit <http://localhost:8000> to access the application.
 
 ### 5. Run Tests
 
@@ -147,6 +147,44 @@ uv run python manage.py loaddata test_data
 
 ## Development Tools
 
+### VS Code Integration
+
+The project includes VS Code configuration for automatic code quality checks.
+
+#### Required VS Code Extensions
+
+When you open the project, VS Code will prompt you to install recommended extensions. Install these:
+
+1. **Python** (ms-python.python) - Python language support
+2. **Pylance** (ms-python.vscode-pylance) - Fast Python language server
+3. **Black Formatter** (ms-python.black-formatter) - Code formatting
+4. **Ruff** (charliermarsh.ruff) - Linting and code quality
+5. **Django** (batisteo.vscode-django) - Django template support
+
+#### Automatic Features
+
+Once extensions are installed:
+
+✅ **Format on Save** - Code is automatically formatted with Black
+✅ **Lint on Save** - Ruff checks code quality automatically
+✅ **Import Organization** - Imports are sorted with isort on save
+✅ **Real-time Errors** - Pylance shows errors as you type
+✅ **120 Character Ruler** - Visual guide for line length
+
+#### Manual Setup
+
+If you prefer manual installation:
+
+```bash
+# 1. Install dependencies
+uv sync --all-extras
+
+# 2. Install VS Code extensions via command palette:
+# - Press Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows/Linux)
+# - Type "Extensions: Install Extensions"
+# - Search and install each extension listed above
+```
+
 ### Install Development Dependencies
 
 ```bash
@@ -160,6 +198,7 @@ uv pip install --system ruff black isort coverage safety bandit
 ### Code Quality Tools
 
 #### Ruff (Linting)
+
 ```bash
 # Check code
 uv run ruff check .
@@ -169,6 +208,7 @@ uv run ruff check . --fix
 ```
 
 #### Black (Formatting)
+
 ```bash
 # Check formatting
 uv run black --check .
@@ -178,6 +218,7 @@ uv run black .
 ```
 
 #### isort (Import Sorting)
+
 ```bash
 # Check imports
 uv run isort --check-only .
@@ -187,6 +228,7 @@ uv run isort .
 ```
 
 #### Run All Quality Checks
+
 ```bash
 # Create a script or run them all
 uv run ruff check . && uv run black --check . && uv run isort --check-only .
@@ -289,9 +331,10 @@ The production stack includes:
 ### Accessing the Application
 
 Once deployed, the application is available at:
-- **Application**: http://localhost
-- **Admin**: http://localhost/admin/
-- **Health Check**: http://localhost/health/
+
+- **Application**: <http://localhost>
+- **Admin**: <http://localhost/admin/>
+- **Health Check**: <http://localhost/health/>
 
 ### Stopping Services
 
@@ -323,26 +366,32 @@ The project includes comprehensive GitHub Actions workflows for continuous integ
 ### Workflows
 
 #### 1. CI - Tests and Linting (`.github/workflows/ci.yaml`)
+
 Runs on every push and pull request to `main` and `develop` branches.
 
 **Jobs:**
+
 - **Test**: Runs all 33 tests with PostgreSQL service container
 - **Lint**: Code quality checks with Ruff, Black, and isort
 - **Security**: Security scans with Safety and Bandit
 - **Coverage**: Generates coverage reports and uploads to Codecov
 
 #### 2. CD - Build and Deploy (`.github/workflows/cd.yaml`)
+
 Runs on pushes to `main` branch and version tags.
 
 **Jobs:**
+
 - **Build**: Builds and pushes Docker image to GitHub Container Registry
 - **Deploy Staging**: Automatically deploys to staging on main branch
 - **Deploy Production**: Deploys to production on version tags (v*)
 
 #### 3. Dependency Updates (`.github/workflows/dependency-update.yaml`)
+
 Runs weekly to check for outdated dependencies.
 
 **Features:**
+
 - Checks for package updates
 - Creates issues for review
 - Runs every Monday at 9 AM UTC
@@ -352,6 +401,7 @@ Runs weekly to check for outdated dependencies.
 1. **Enable GitHub Actions** in your repository settings
 
 2. **Configure Secrets** (Settings → Secrets and variables → Actions):
+
    ```
    No secrets required for basic CI
    Add deployment secrets as needed:
@@ -386,6 +436,7 @@ git push origin v1.0.0
 ### Monitoring Builds
 
 View build status and logs:
+
 - **Actions tab** in GitHub repository
 - **Commit status checks** on pull requests
 - **Email notifications** for failed builds
