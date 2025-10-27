@@ -2,7 +2,6 @@
 Tests for Application model.
 """
 from django.test import TestCase
-from django.core.exceptions import ValidationError
 from core.models import Application
 
 

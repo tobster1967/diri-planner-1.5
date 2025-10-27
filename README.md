@@ -145,6 +145,90 @@ uv run python manage.py migrate
 uv run python manage.py loaddata test_data
 ```
 
+## Development Tools
+
+### Install Development Dependencies
+
+```bash
+# Install development tools
+uv pip install --dev
+```
+
+### Code Quality Tools
+
+#### Ruff (Linting)
+```bash
+# Check code
+uv run ruff check .
+
+# Fix auto-fixable issues
+uv run ruff check . --fix
+```
+
+#### Black (Formatting)
+```bash
+# Check formatting
+uv run black --check .
+
+# Format code
+uv run black .
+```
+
+#### isort (Import Sorting)
+```bash
+# Check imports
+uv run isort --check-only .
+
+# Sort imports
+uv run isort .
+```
+
+#### Run All Quality Checks
+```bash
+# Create a script or run them all
+uv run ruff check . && uv run black --check . && uv run isort --check-only .
+```
+
+### Security Scanning
+
+```bash
+# Check for vulnerabilities in dependencies
+uv run safety check
+
+# Security audit of code
+uv run bandit -r . -f json -o bandit-report.json
+```
+
+### Code Coverage
+
+```bash
+# Run tests with coverage
+uv run coverage run --source='.' manage.py test core.tests
+
+# Generate coverage report
+uv run coverage report
+
+# Generate HTML coverage report
+uv run coverage html
+# Open htmlcov/index.html in browser
+```
+
+### Pre-commit Checks
+
+Create a script to run before committing:
+
+```bash
+#!/bin/bash
+# pre-commit-check.sh
+
+echo "Running code quality checks..."
+uv run ruff check . || exit 1
+uv run black --check . || exit 1
+uv run isort --check-only . || exit 1
+uv run python manage.py test core.tests || exit 1
+echo "All checks passed!"
+```
+
 ## Testing
 
 The project includes comprehensive test coverage:
