@@ -10,6 +10,7 @@ dependencies = [
     "django-debug-toolbar>=6.0.0",
     "django-dynamic-admin-forms>=3.2.10",
     "django-fast-treenode>=1.0.0",
+    "gunicorn>=21.2.0",
     "neapolitan>=24.11",
     "psycopg2-binary>=2.9.9",
     "python-dotenv>=1.0.0",

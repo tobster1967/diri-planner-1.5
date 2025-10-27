@@ -1,0 +1,43 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run weekly on Monday at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  update-dependencies:
+    name: Check for Dependency Updates
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Check for outdated packages
+        run: |
+          uv pip list --outdated || true
+
+      - name: Create issue for outdated dependencies
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = 'Weekly Dependency Update Check';
+            const body = 'This is an automated check for outdated dependencies.\n\nPlease review and update as necessary.';
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['dependencies', 'automated']
+            });

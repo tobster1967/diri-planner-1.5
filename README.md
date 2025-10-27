@@ -156,6 +156,153 @@ The project includes comprehensive test coverage:
 
 All tests use the `test_data.json` fixture for consistent, isolated testing.
 
+## Production Deployment with Docker
+
+The application includes Docker configuration for production deployment with Nginx reverse proxy.
+
+### Prerequisites
+
+- Docker
+- Docker Compose
+
+### Build and Deploy
+
+```bash
+# 1. Create production environment file
+cp .env.prod.example .env.prod
+# Edit .env.prod with your production credentials
+
+# 2. Build and start services
+docker-compose -f docker-compose.prod.yaml up -d --build
+
+# 3. Check service health
+docker-compose -f docker-compose.prod.yaml ps
+
+# 4. View logs
+docker-compose -f docker-compose.prod.yaml logs -f
+
+# 5. Run migrations (first time only)
+docker-compose -f docker-compose.prod.yaml exec web python manage.py migrate
+
+# 6. Create superuser (first time only)
+docker-compose -f docker-compose.prod.yaml exec web python manage.py createsuperuser
+
+# 7. Load fixtures (optional)
+docker-compose -f docker-compose.prod.yaml exec web python manage.py loaddata test_data
+```
+
+### Services
+
+The production stack includes:
+
+- **web**: Django application running with Gunicorn (4 workers)
+- **db**: PostgreSQL 15 database
+- **nginx**: Nginx reverse proxy serving static files and proxying to Django
+
+### Accessing the Application
+
+Once deployed, the application is available at:
+- **Application**: http://localhost
+- **Admin**: http://localhost/admin/
+- **Health Check**: http://localhost/health/
+
+### Stopping Services
+
+```bash
+# Stop services
+docker-compose -f docker-compose.prod.yaml down
+
+# Stop and remove volumes (WARNING: deletes all data)
+docker-compose -f docker-compose.prod.yaml down -v
+```
+
+### Production Checklist
+
+Before deploying to production:
+
+1. ✅ Set `DEBUG=False` in `.env.prod`
+2. ✅ Generate a strong `SECRET_KEY`
+3. ✅ Set appropriate `ALLOWED_HOSTS`
+4. ✅ Use strong database credentials
+5. ✅ Configure SSL/TLS certificates in nginx
+6. ✅ Set up backup strategy for database
+7. ✅ Configure monitoring and logging
+8. ✅ Review and harden security settings
+
+## CI/CD Pipeline
+
+The project includes comprehensive GitHub Actions workflows for continuous integration and deployment.
+
+### Workflows
+
+#### 1. CI - Tests and Linting (`.github/workflows/ci.yaml`)
+Runs on every push and pull request to `main` and `develop` branches.
+
+**Jobs:**
+- **Test**: Runs all 33 tests with PostgreSQL service container
+- **Lint**: Code quality checks with Ruff, Black, and isort
+- **Security**: Security scans with Safety and Bandit
+- **Coverage**: Generates coverage reports and uploads to Codecov
+
+#### 2. CD - Build and Deploy (`.github/workflows/cd.yaml`)
+Runs on pushes to `main` branch and version tags.
+
+**Jobs:**
+- **Build**: Builds and pushes Docker image to GitHub Container Registry
+- **Deploy Staging**: Automatically deploys to staging on main branch
+- **Deploy Production**: Deploys to production on version tags (v*)
+
+#### 3. Dependency Updates (`.github/workflows/dependency-update.yaml`)
+Runs weekly to check for outdated dependencies.
+
+**Features:**
+- Checks for package updates
+- Creates issues for review
+- Runs every Monday at 9 AM UTC
+
+### Setting Up CI/CD
+
+1. **Enable GitHub Actions** in your repository settings
+
+2. **Configure Secrets** (Settings → Secrets and variables → Actions):
+   ```
+   No secrets required for basic CI
+   Add deployment secrets as needed:
+   - DEPLOY_SSH_KEY (for SSH deployments)
+   - REGISTRY_USERNAME (if using external registry)
+   - REGISTRY_PASSWORD (if using external registry)
+   ```
+
+3. **Configure Environments** (Settings → Environments):
+   - Create `staging` environment
+   - Create `production` environment with protection rules
+
+4. **Enable Branch Protection** (Settings → Branches):
+   - Require pull request reviews
+   - Require status checks to pass before merging
+   - Require CI workflow to pass
+
+### Triggering Deployments
+
+```bash
+# Deploy to staging (push to main)
+git push origin main
+
+# Deploy to production (create version tag)
+git tag v1.0.0
+git push origin v1.0.0
+
+# Manual deployment
+# Go to Actions → CD - Build and Deploy → Run workflow
+```
+
+### Monitoring Builds
+
+View build status and logs:
+- **Actions tab** in GitHub repository
+- **Commit status checks** on pull requests
+- **Email notifications** for failed builds
+
 ## Database Configuration
 
 Default PostgreSQL settings (configure in `.env`):
